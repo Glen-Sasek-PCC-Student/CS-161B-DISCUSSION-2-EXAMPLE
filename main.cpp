@@ -1,80 +1,60 @@
-// ------------- FILE HEADER -------------
-// Author ✅: 
-// Assignment ✅:
-// Date ✅:
-// Citations: 
-
-
-// ------------- ZYBOOKS SCORES -------------
-// Chapter ✅: 
-// Participation ✅: 
-// Challenge ✅:
-// Labs ✅:
-
-
-// ------------- DISCORD POSTS -------------
-// https://discord.com/invite/URYKKf8YHm
-// Count ✅:
-// Links (Optional): 
-
-
-// ------------- DESIGN DOCUMENT -------------
-// A. INPUT ✅: 
-// B. OUTPUT ✅:
-// C. CALCULATIONS ✅:
-// D. LOGIC and ALGORITHMS ✅:
-//    (Optional) flow chart link or file name: 
-
-
-// ------------- TESTING -------------
-// PASS ALL GIVEN SAMPLE RUN TESTS ✅: 
-// (Optional) Additional tests count:   
-
-
-// ------------- CODE -------------
 #include <iostream>
+#include <cstring>
 
 using namespace std;
 
-// Function prototypes (if any)
-
-
-// Main function
-// https://en.cppreference.com/w/cpp/language/main_function.html
 int main(int argc, char* argv[]) {
-  cout << "Hello, World!" << endl;
+  const int MAX_PHRASE_CHARS = 20;
+  const int REQUIRED_DIGIT_COUNT = 4;
+  char phrase[MAX_PHRASE_CHARS + 1] = {};
+  char digits[REQUIRED_DIGIT_COUNT + 1] = {};
+  char symbol = '\0';
+
+  cout << "PHRASE: ";
+  cin.getline(phrase, MAX_PHRASE_CHARS);
+
+  bool getDigits = true;
+  while(getDigits) {
+    cout << "4 DIGITS [0-9]: ";
+    bool isDigit = true;
+    for(int i = 0; i < REQUIRED_DIGIT_COUNT && isDigit; i++) {
+      cin >> digits[i];
+      isDigit = digits[i] >= '0' && digits[i] <= '9';
+    }
+    if(isDigit) {
+      getDigits = false;
+    } else {
+      cout << "Hey, that wasn't a digit :(" << endl;
+    }
+  }
+
+  cout << "SYMBOL: ";
+  cin >> symbol;
+
+  char s2[MAX_PHRASE_CHARS] = {};
+  
+  const std::size_t len_until_space = strcspn(phrase, " ");
+  strncpy(s2, phrase, len_until_space);
+  strcat(s2,digits);
+  char symbolString[2] = {symbol, '\0'};
+  strcat(s2, symbolString);
+  
+  cout << "Your strong password is: " << s2 << endl;
+
   return 0;
 }
 
-// Function implementations (if any)
 
+// Mower Street 1991 $
 
-// ------------- DESIGN -------------
-/* 
-Program Name:
+// the output is:
 
-Program Description:
+// Your strong password is: Mower1991$
 
-Design:
-A. INPUT
-Define the input variables including name data type. 
+// Ex: If the input is:
 
-B. OUTPUT
-Define the output variables including data types. 
+// Gayathri Iyer 2024 &
 
-C. CALCULATIONS
-Describe calculations used by algorithms in step D.  
-List all formulas. 
-If there are no calculations needed, state there are no calculations.
+// the output is:
 
-D. LOGIC and ALGORITHMS
-Design the logic of your program using pseudocode or flowcharts. 
-Use conditionals, loops, functions or array constructs.
-List the steps in transforming inputs into outputs. 
-https://github.com/Glen-Sasek-PCC-Instructor/2025-06-22/blob/main/Pseudocode-Reference.txt
-
-
-SAMPLE RUNS
-Copy from assignment document.
-
-*/
+// Your strong password is: Gayathri2024&
